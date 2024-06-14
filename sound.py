@@ -4,7 +4,7 @@ import pygame as pg
 class Sound:
     def __init__(self, game):
         self.game = game
-        pg.mixer.init(channels=64, allowedchanges=15)
+        pg.mixer.init(channels=64, allowedchanges=15, buffer=2048)
         self.path = 'resources/sound/'
         self.shotgun = pg.mixer.Sound(self.path + 'shotgun.wav')
         self.basic_knife_hit_success = pg.mixer.Sound(self.path + 'basic_knife_hit_success.wav')

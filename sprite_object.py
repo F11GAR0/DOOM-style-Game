@@ -92,6 +92,5 @@ class AnimatedSprite(SpriteObject):
         for file_name in sorted_list:
             if os.path.isfile(os.path.join(path, file_name)):
                 img = pg.image.load(path + '/' + file_name).convert_alpha()
-                print(f"Loaded {path+'/'+file_name}")
                 images.append(img)
         return images

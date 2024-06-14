@@ -33,7 +33,7 @@ class Game:
         self.object_handler = ObjectHandler(self)
         self.sound = Sound(self)
         self.weapons = deque( [ Weapon(self, self.sound.shotgun, self.sound.shotgun), \
-                                Weapon(self, self.sound.basic_knife_hit_miss, self.sound.basic_knife_hit_success, 'resources/sprites/weapon/basic_knife/0.png', melee=True, damage=50)] )
+                                Weapon(self, self.sound.basic_knife_hit_miss, self.sound.basic_knife_hit_success, animation_time=45, path='resources/sprites/weapon/basic_knife/0.png', melee=True, damage=50)] )
         self.current_weapon = self.weapons[0]
         self.pathfinding = PathFinding(self)
         pg.mixer.music.play(-1)
@@ -57,6 +57,8 @@ class Game:
     def check_events(self):
         self.global_trigger = False
         for event in pg.event.get():
+            if event.type == pg.KEYDOWN and event.key == pg.K_7:
+                pg.image.save(self.screen, "screenshot_last.png")
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 pg.quit()
                 sys.exit()
