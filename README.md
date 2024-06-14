@@ -1,6 +1,7 @@
 ### Fork of DOOM style 3d (raycasting) game in Python (based on Wolfenstein 3d)
 # Prince of Persia doom-style
 Control: 'WASD' + mouse
+Screenshot: key 7
 
 ![doom](/sreenshots/0.jpg)
 
