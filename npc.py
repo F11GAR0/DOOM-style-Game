@@ -69,13 +69,37 @@ class NPC(AnimatedSprite):
             self.pain = False
 
     def check_hit_in_npc(self):
+
         if self.ray_cast_value and self.game.player.shot:
-            if HALF_WIDTH - self.sprite_half_width < self.screen_x < HALF_WIDTH + self.sprite_half_width:
+
+            if self.game.current_weapon.melee:
+
+                if self.dist > 1.0:
+                    self.game.current_weapon.shot_sound.play()
+                    return
+                self.game.current_weapon.success_shot_sound.play()
                 self.game.sound.npc_pain.play()
+
                 self.game.player.shot = False
                 self.pain = True
-                self.health -= self.game.weapon.damage
+                self.health -= self.game.current_weapon.damage
                 self.check_health()
+
+            else:
+
+                if HALF_WIDTH - self.sprite_half_width < self.screen_x < HALF_WIDTH + self.sprite_half_width:
+
+                    self.game.current_weapon.success_shot_sound.play()
+                    self.game.sound.npc_pain.play()
+                    self.game.player.shot = False
+                    self.pain = True
+                    self.health -= self.game.current_weapon.damage
+                    self.check_health()
+                else:
+                    self.game.current_weapon.shot_sound.play()
+
+        elif self.game.player.shot:
+            self.game.current_weapon.shot_sound.play()
 
     def check_health(self):
         if self.health < 1:
